@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace FlixTech\AvroSerializer\Test\Objects\Schema\Generation\Fixture;
 
 use FlixTech\AvroSerializer\Objects\Schema\Generation\Annotations as SerDe;
+use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroDefault;
+use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroName;
+use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroNamespace;
+use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroType;
 
 /**
  * @SerDe\AvroName("SimpleRecord")
@@ -13,6 +17,9 @@ use FlixTech\AvroSerializer\Objects\Schema\Generation\Annotations as SerDe;
  *
  * @SerDe\AvroType("record")
  */
+#[AvroName('SimpleRecord')]
+#[AvroNamespace('org.acme')]
+#[AvroType('record')]
 class SimpleRecord
 {
     /**
@@ -20,5 +27,19 @@ class SimpleRecord
      *
      * @SerDe\AvroDefault(42)
      */
+    #[AvroType('int')]
+    #[AvroDefault(42)]
     private $intType;
+
+    /**
+     * @SerDe\AvroType("uuid")
+     */
+    #[AvroType('uuid')]
+    private $uuidType;
+
+    /**
+     * @SerDe\AvroType("timestamp-millis")
+     */
+    #[AvroType('timestamp-millis')]
+    private $timestampMillisType;
 }
