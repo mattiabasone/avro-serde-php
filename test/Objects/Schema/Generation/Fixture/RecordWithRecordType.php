@@ -15,8 +15,8 @@ use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroType;
  *
  * @SerDe\AvroName("RecordWithRecordType")
  */
-#[AvroType("record")]
-#[AvroName("RecordWithRecordType")]
+#[AvroType('record')]
+#[AvroName('RecordWithRecordType')]
 class RecordWithRecordType
 {
     /**
@@ -29,10 +29,10 @@ class RecordWithRecordType
      *     @SerDe\AvroDoc("This a simple record for testing purposes")
      * })
      */
-    #[AvroName("simpleField")]
-    #[AvroType("record",
+    #[AvroName('simpleField')]
+    #[AvroType('record',
         new AvroTargetClass(SimpleRecord::class),
-        new AvroDoc("This a simple record for testing purposes")
+        new AvroDoc('This a simple record for testing purposes')
     )]
     private SimpleRecord $simpleRecord;
 
@@ -42,8 +42,8 @@ class RecordWithRecordType
      * @SerDe\AvroType("null")
      * @SerDe\AvroType("org.acme.SimpleRecord")
      */
-    #[AvroName("unionField")]
-    #[AvroType("null")]
-    #[AvroType("org.acme.SimpleRecord")]
+    #[AvroName('unionField')]
+    #[AvroType('null')]
+    #[AvroType('org.acme.SimpleRecord')]
     private ?SimpleRecord $unionRecord;
 }
