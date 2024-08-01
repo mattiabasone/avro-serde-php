@@ -17,9 +17,9 @@ use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroType;
  *
  * @SerDe\AvroType("record")
  */
-#[AvroName("SimpleRecord")]
-#[AvroNamespace("org.acme")]
-#[AvroType("record")]
+#[AvroName('SimpleRecord')]
+#[AvroNamespace('org.acme')]
+#[AvroType('record')]
 class SimpleRecord
 {
     /**
@@ -27,19 +27,19 @@ class SimpleRecord
      *
      * @SerDe\AvroDefault(42)
      */
-    #[AvroType("int")]
+    #[AvroType('int')]
     #[AvroDefault(42)]
     private $intType;
 
     /**
      * @SerDe\AvroType("uuid")
      */
-    #[AvroType("uuid")]
+    #[AvroType('uuid')]
     private $uuidType;
 
     /**
      * @SerDe\AvroType("timestamp-millis")
      */
-    #[AvroType("timestamp-millis")]
+    #[AvroType('timestamp-millis')]
     private $timestampMillisType;
 }
