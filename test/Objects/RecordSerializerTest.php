@@ -56,16 +56,20 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
         $matcher = $this->exactly(2);
         $this->registryMock
             ->expects($matcher)
-            ->method('schemaId')->willReturnCallback(function ($parameters) use ($matcher) {
-            match ($matcher->numberOfInvocations()) {
-                1 => self::assertEquals(['test', $this->avroSchema], $parameters),
-                2 => self::assertEquals(['test', $this->avroSchema], $parameters),
-            };
-            return match ($matcher->numberOfInvocations()) {
-                1 => self::SCHEMA_ID,
-                2 => new FulfilledPromise(self::SCHEMA_ID),
-            };
-        });
+            ->method('schemaId')
+            ->willReturnCallback(
+                function (...$parameters) use ($matcher) {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertEquals(['test', $this->avroSchema], $parameters),
+                        2 => self::assertEquals(['test', $this->avroSchema], $parameters),
+                    };
+
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => self::SCHEMA_ID,
+                        2 => new FulfilledPromise(self::SCHEMA_ID),
+                    };
+                }
+            );
 
         $this->assertSame(
             self::HEX_BIN,
@@ -196,16 +200,19 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
 
         $this->registryMock
             ->expects($matcher)
-            ->method('register')->willReturnCallback(function ($parameters) use ($matcher) {
-            match ($matcher->numberOfInvocations()) {
-                1 => self::assertEquals(['test', $this->avroSchema], $parameters),
-                2 => self::assertEquals(['test', $this->avroSchema], $parameters),
-            };
-            return match ($matcher->numberOfInvocations()) {
-                1 => self::SCHEMA_ID,
-                2 => new FulfilledPromise(self::SCHEMA_ID),
-            };
-        });
+            ->method('register')
+            ->willReturnCallback(
+                function (...$parameters) use ($matcher) {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertEquals(['test', $this->avroSchema], $parameters),
+                        2 => self::assertEquals(['test', $this->avroSchema], $parameters),
+                    };
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => self::SCHEMA_ID,
+                        2 => new FulfilledPromise(self::SCHEMA_ID),
+                    };
+                }
+        );
 
         $this->assertSame(
             self::HEX_BIN,
@@ -265,16 +272,19 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
         $matcher = $this->exactly(2);
         $this->registryMock
             ->expects($matcher)
-            ->method('schemaForId')->willReturnCallback(function ($parameters) use ($matcher) {
-            match ($matcher->numberOfInvocations()) {
-                1 => self::assertEquals([self::SCHEMA_ID], $parameters),
-                2 => self::assertEquals([self::SCHEMA_ID], $parameters),
-            };
-            return match ($matcher->numberOfInvocations()) {
-                1 => $this->avroSchema,
-                2 => new FulfilledPromise($this->avroSchema),
-            };
-        });
+            ->method('schemaForId')
+            ->willReturnCallback(
+                function (...$parameters) use ($matcher) {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertEquals([self::SCHEMA_ID], $parameters),
+                        2 => self::assertEquals([self::SCHEMA_ID], $parameters),
+                    };
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => $this->avroSchema,
+                        2 => new FulfilledPromise($this->avroSchema),
+                    };
+                }
+        );
 
         $this->assertSame(
             self::TEST_RECORD,
@@ -297,16 +307,19 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
         $matcher = $this->exactly(2);
         $this->registryMock
             ->expects($matcher)
-            ->method('schemaForId')->willReturnCallback(function ($parameters) use ($matcher) {
-            match ($matcher->numberOfInvocations()) {
-                1 => self::assertEquals([self::SCHEMA_ID], $parameters),
-                2 => self::assertEquals([self::SCHEMA_ID], $parameters),
-            };
-            return match ($matcher->numberOfInvocations()) {
-                1 => $this->avroSchema,
-                2 => new FulfilledPromise($this->avroSchema),
-            };
-        });
+            ->method('schemaForId')
+            ->willReturnCallback(
+                function (...$parameters) use ($matcher) {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertEquals([self::SCHEMA_ID], $parameters),
+                        2 => self::assertEquals([self::SCHEMA_ID], $parameters),
+                    };
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => $this->avroSchema,
+                        2 => new FulfilledPromise($this->avroSchema),
+                    };
+                }
+        );
 
         $this->assertSame(
             self::READERS_TEST_RECORD,

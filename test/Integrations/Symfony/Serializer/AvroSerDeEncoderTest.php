@@ -76,16 +76,19 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
     {
         $matcher = $this->exactly(2);
         $this->recordSerializerMock->expects($matcher)
-            ->method('decodeMessage')->willReturnCallback(function ($parameters) use ($matcher) {
-            match ($matcher->numberOfInvocations()) {
-                1 => self::assertEquals([AbstractFunctionalTestCase::AVRO_ENCODED_RECORD_HEX_BIN, null], $parameters),
-                2 => self::assertEquals([AbstractFunctionalTestCase::AVRO_ENCODED_RECORD_HEX_BIN, $this->readersSchema], $parameters),
-            };
-            return match ($matcher->numberOfInvocations()) {
-                1 => 'success-1',
-                2 => 'success-2',
-            };
-        });
+            ->method('decodeMessage')
+            ->willReturnCallback(
+                function (...$parameters) use ($matcher) {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertEquals([AbstractFunctionalTestCase::AVRO_ENCODED_RECORD_HEX_BIN, null], $parameters),
+                        2 => self::assertEquals([AbstractFunctionalTestCase::AVRO_ENCODED_RECORD_HEX_BIN, $this->readersSchema], $parameters),
+                    };
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => 'success-1',
+                        2 => 'success-2',
+                    };
+                }
+        );
 
         $result = $this->avroSerDeEncoder->decode(
             AbstractFunctionalTestCase::AVRO_ENCODED_RECORD_HEX_BIN,
