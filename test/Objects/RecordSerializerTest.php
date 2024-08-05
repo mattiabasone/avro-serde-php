@@ -130,11 +130,22 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
             ->with('test', $this->avroSchema)
             ->willThrowException(new SchemaNotFoundException());
 
+        $returns = [
+            [['test', $this->avroSchema], self::SCHEMA_ID],
+            [['test', $this->avroSchema], new FulfilledPromise(self::SCHEMA_ID)]
+        ];
+
         $this->registryMock
             ->expects($this->exactly(2))
             ->method('register')
-            ->withConsecutive(['test', $this->avroSchema], ['test', $this->avroSchema])
-            ->willReturn(self::SCHEMA_ID, new FulfilledPromise(self::SCHEMA_ID));
+            ->willReturnCallback(
+                function (...$args) use (&$returns){
+                    [$expectedArgs, $return] = array_shift($returns);
+
+                    self::assertEquals($expectedArgs, $args);
+                    return $return;
+                }
+            );
 
         $this->assertSame(
             self::HEX_BIN,
