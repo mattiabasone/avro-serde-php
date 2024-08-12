@@ -157,6 +157,14 @@ class SchemaGeneratorTest extends TestCase
                         'intType',
                         Schema::int(),
                         FieldOption::default(42)
+                    )
+                    ->field(
+                        'uuidType',
+                        Schema::uuid()
+                    )
+                    ->field(
+                        'timestampMillisType',
+                        Schema::timestampMillis()
                     ),
             )
             ->field(
@@ -186,6 +194,13 @@ class SchemaGeneratorTest extends TestCase
                         'intType',
                         Schema::int(),
                         FieldOption::default(42)
+                    )->field(
+                        'uuidType',
+                        Schema::uuid()
+                    )
+                    ->field(
+                        'timestampMillisType',
+                        Schema::timestampMillis()
                     ),
             )
             ->field(

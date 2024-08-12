@@ -27,4 +27,16 @@ class SimpleRecord
     #[AvroType("int")]
     #[AvroDefault(42)]
     private $intType;
+
+    /**
+     * @SerDe\AvroType("uuid")
+     */
+    #[AvroType("uuid")]
+    private $uuidType;
+
+    /**
+     * @SerDe\AvroType("timestamp-millis")
+     */
+    #[AvroType("timestamp-millis")]
+    private $timestampMillisType;
 }

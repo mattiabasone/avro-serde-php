@@ -31,6 +31,13 @@ final class TypeMapper
             TypeName::MAP => $this->simpleType(Schema::map()),
             TypeName::ENUM => $this->simpleType(Schema::enum()),
             TypeName::FIXED => $this->simpleType(Schema::fixed()),
+            TypeName::UUID => $this->simpleType(Schema::uuid()),
+            TypeName::TIME_MICROS => $this->simpleType(Schema::timeMicros()),
+            TypeName::TIME_MILLIS => $this->simpleType(Schema::timeMillis()),
+            TypeName::TIMESTAMP_MICROS => $this->simpleType(Schema::timestampMicros()),
+            TypeName::TIMESTAMP_MILLIS => $this->simpleType(Schema::timestampMillis()),
+            TypeName::LOCAL_TIMESTAMP_MICROS => $this->simpleType(Schema::localTimestampMicros()),
+            TypeName::LOCAL_TIMESTAMP_MILLIS => $this->simpleType(Schema::localTimestampMillis()),
         ];
     }
 
