@@ -6,6 +6,7 @@ namespace FlixTech\AvroSerializer\Test\Objects\Schema;
 
 use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\Schema;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class FixedTypeTest extends TestCase
@@ -41,7 +42,6 @@ class FixedTypeTest extends TestCase
             ->aliases('hash', 'fileHash')
             ->parse();
 
-        $this->assertInstanceOf(\AvroSchema::class, $parsedSchema);
         $this->assertEquals('fixed', $parsedSchema->type());
     }
 }

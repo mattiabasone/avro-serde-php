@@ -6,6 +6,7 @@ namespace FlixTech\AvroSerializer\Test\Objects\Schema;
 
 use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\Schema;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class EnumTypeTest extends TestCase
@@ -43,10 +44,10 @@ class EnumTypeTest extends TestCase
             ->namespace('com.org.acme')
             ->aliases('outfit', 'elegant')
             ->doc('Suit up!')
-            ->symbols(...['SPADES', 'HEARTS', 'DIAMONDS', 'CLUBS'])
+            ->symbols('SPADES', 'HEARTS', 'DIAMONDS', 'CLUBS')
             ->default('SPADES')
             ->parse();
 
-        $this->assertInstanceOf(\AvroSchema::class, $parsedSchema);
+        $this->assertEquals('enum', $parsedSchema->type());
     }
 }

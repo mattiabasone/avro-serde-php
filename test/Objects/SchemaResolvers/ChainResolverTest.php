@@ -5,33 +5,25 @@ namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\ChainResolver;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ChainResolverTest extends TestCase
 {
-    /**
-     * @var MockObject|SchemaResolverInterface
-     */
-    private $chainOne;
+    private SchemaResolverInterface|MockObject $chainOne;
 
-    /**
-     * @var MockObject|SchemaResolverInterface
-     */
-    private $chainTwo;
+    private SchemaResolverInterface|MockObject $chainTwo;
 
-    /**
-     * @var ChainResolver
-     */
-    private $chain;
+    private ChainResolver $chain;
 
     /**
      * @throws \ReflectionException
      */
     protected function setUp(): void
     {
-        $this->chainOne = $this->getMockForAbstractClass(SchemaResolverInterface::class);
-        $this->chainTwo = $this->getMockForAbstractClass(SchemaResolverInterface::class);
+        $this->chainOne = $this->getMockBuilder(SchemaResolverInterface::class)->getMock();
+        $this->chainTwo = $this->getMockBuilder(SchemaResolverInterface::class)->getMock();
 
         $this->chain = new ChainResolver($this->chainOne, $this->chainTwo);
     }

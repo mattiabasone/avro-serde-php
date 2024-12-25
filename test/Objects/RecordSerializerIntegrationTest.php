@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects;
 
-use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\Depends;
-use FlixTech\SchemaRegistryApi\Exception\SchemaRegistryException;
 use FlixTech\AvroSerializer\Objects\DefaultRecordSerializerFactory;
 use FlixTech\AvroSerializer\Objects\RecordSerializer;
 use FlixTech\AvroSerializer\Test\AbstractFunctionalTestCase;
 use FlixTech\SchemaRegistryApi\Exception\IncompatibleAvroSchemaException;
+use FlixTech\SchemaRegistryApi\Exception\SchemaRegistryException;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 class RecordSerializerIntegrationTest extends AbstractFunctionalTestCase
@@ -32,12 +32,10 @@ class RecordSerializerIntegrationTest extends AbstractFunctionalTestCase
     }
 
     /**
-     *
-     *
      * @throws SchemaRegistryException
      */
-    #[Depends('it_encodes_valid_records')]
     #[Test]
+    #[Depends('it_encodes_valid_records')]
     public function it_cannot_evolve_incompatible_schema(RecordSerializer $serializer): void
     {
         $this->expectException(IncompatibleAvroSchemaException::class);
@@ -45,12 +43,10 @@ class RecordSerializerIntegrationTest extends AbstractFunctionalTestCase
     }
 
     /**
-     *
-     *
      * @throws SchemaRegistryException
      */
-    #[Depends('it_encodes_valid_records')]
     #[Test]
+    #[Depends('it_encodes_valid_records')]
     public function it_decodes_with_readers_schema(RecordSerializer $serializer): RecordSerializer
     {
         $encoded = $serializer->encodeRecord('test-value', $this->avroSchema, self::TEST_RECORD);
