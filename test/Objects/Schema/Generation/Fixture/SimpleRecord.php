@@ -12,7 +12,9 @@ use FlixTech\AvroSerializer\Objects\Schema\Generation\Attributes\AvroType;
 
 /**
  * @SerDe\AvroName("SimpleRecord")
+ *
  * @SerDe\AvroNamespace("org.acme")
+ *
  * @SerDe\AvroType("record")
  */
 #[AvroName("SimpleRecord")]
@@ -22,6 +24,7 @@ class SimpleRecord
 {
     /**
      * @SerDe\AvroType("int")
+     *
      * @SerDe\AvroDefault(42)
      */
     #[AvroType("int")]
