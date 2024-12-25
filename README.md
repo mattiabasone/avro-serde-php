@@ -13,7 +13,7 @@ When serializing and deserializing messages using the [Avro](http://avro.apache.
 especially when integrating with the [Confluent Platform](https://docs.confluent.io/current/avro.html), you want to make
 sure that schemas are evolved in a way that downstream consumers are not affected.
 
-Hence [Confluent](https://www.confluent.io/) developed the
+Hence, [Confluent](https://www.confluent.io/) developed the
 [Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html) which has the responsibility to
 validate a given schema evolution against a configurable compatibility policy.
 
@@ -273,7 +273,7 @@ $resolver->keySchemaFor($record); // Will resolve $fileResolver, then $callableR
 
 ## Symfony Serializer Integration
 
-This library provides integrations with the [Symfony Serializer component](https://symfony.com/doc/master/components/serializer.html).
+This library provides integrations with the [Symfony Serializer component](https://symfony.com/doc/master/components/serializer.html) from version 6.4 and above.
 
 ```php
 <?php
