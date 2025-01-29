@@ -75,8 +75,7 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
     #[Test]
     public function it_should_decode_with_valid_decode_context(): void
     {
-        $matcher = $this->exactly(2);
-        $this->recordSerializerMock->expects($matcher)
+        $this->recordSerializerMock->expects($this->exactly(2))
             ->method('decodeMessage')
             ->willReturnOnConsecutiveCalls('success-1', 'success-2');
 
