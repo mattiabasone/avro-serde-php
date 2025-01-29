@@ -18,7 +18,7 @@ final class AvroItems implements TypeOnlyAttribute
 
     public function __construct(Type|AvroType ...$types)
     {
-        $this->types = array_map(function ($type) {
+        $this->types = array_map(static function ($type) {
             if ($type instanceof AvroType) {
                 return $type;
             }
