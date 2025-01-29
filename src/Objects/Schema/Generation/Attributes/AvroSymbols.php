@@ -12,13 +12,16 @@ use FlixTech\AvroSerializer\Objects\Schema\Generation\VariadicAttribute;
 final class AvroSymbols implements VariadicAttribute
 {
     /**
-     * @var array<string>
+     * @var non-empty-array<int, string>
      */
     private array $symbols;
 
-    public function __construct(callable $symbols)
+    /**
+     * @param non-empty-array<int, string> $symbols
+     */
+    public function __construct(array $symbols)
     {
-        $this->symbols = $symbols();
+        $this->symbols = $symbols;
     }
 
     public function name(): string
