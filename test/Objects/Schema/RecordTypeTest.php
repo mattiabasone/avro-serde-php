@@ -2,7 +2,6 @@
 
 namespace FlixTech\AvroSerializer\Test\Objects\Schema;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\Schema;
 use FlixTech\AvroSerializer\Objects\Schema\Record\FieldOption;
 use PHPUnit\Framework\Attributes\Test;

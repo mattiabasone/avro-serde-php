@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Integrations\Symfony\Serializer;
 
-use PHPUnit\Framework\Attributes\Test;
 use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;
 use FlixTech\AvroSerializer\Integrations\Symfony\Serializer\AvroSerDeEncoder;
 use FlixTech\AvroSerializer\Integrations\Symfony\Serializer\NameConverter\AvroNameConverter;

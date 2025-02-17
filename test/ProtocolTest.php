@@ -2,7 +2,6 @@
 
 namespace FlixTech\AvroSerializer\Test;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\Exceptions\AvroDecodingException;
 use PHPUnit\Framework\Attributes\Test;
 use Widmogrod\Monad\Either\Left;

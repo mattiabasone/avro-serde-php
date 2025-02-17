@@ -2,7 +2,6 @@
 
 namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\ChainResolver;
 use PHPUnit\Framework\Attributes\Test;
