@@ -2,8 +2,8 @@
 
 namespace FlixTech\AvroSerializer\Test;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\Exceptions\AvroDecodingException;
+use PHPUnit\Framework\Attributes\Test;
 use Widmogrod\Monad\Either\Left;
 use Widmogrod\Monad\Either\Right;
 use Widmogrod\Monad\Maybe\Just;
@@ -65,7 +65,7 @@ class ProtocolTest extends AbstractFunctionalTestCase
 
         $unpacked = $decoded->extract();
 
-        $this->assertTrue(\is_array($unpacked));
+        $this->assertIsArray($unpacked);
         $this->assertSame(WIRE_FORMAT_PROTOCOL_VERSION, $unpacked[PROTOCOL_ACCESSOR_VERSION]);
         $this->assertSame(self::SCHEMA_ID, $unpacked[PROTOCOL_ACCESSOR_SCHEMA_ID]);
         $this->assertSame(self::AVRO_ENCODED_RECORD_HEX_BIN, \bin2hex($unpacked[PROTOCOL_ACCESSOR_AVRO]));

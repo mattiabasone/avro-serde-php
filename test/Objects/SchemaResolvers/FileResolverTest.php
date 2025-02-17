@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 
-use PHPUnit\Framework\Attributes\Test;
-use Widmogrod\Common\ValueOfInterface;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\FileResolver;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Widmogrod\Common\ValueOfInterface;
 
 use function FlixTech\AvroSerializer\Common\inflectRecord;
 

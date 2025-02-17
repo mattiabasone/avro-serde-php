@@ -20,6 +20,9 @@ class AttributeReader implements SchemaAttributeReader
         return $this->getSchemaAttributes(...$attributes);
     }
 
+    /**
+     * @param \ReflectionAttribute<object> ...$attributes
+     */
     private function getSchemaAttributes(\ReflectionAttribute ...$attributes): SchemaAttributes
     {
         $attributes = array_map(fn ($attr) => $attr->newInstance(), $attributes);

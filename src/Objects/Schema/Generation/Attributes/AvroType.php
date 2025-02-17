@@ -20,7 +20,7 @@ class AvroType implements SchemaAttribute
 
     public function __construct(
         Type|string $value,
-        SchemaAttribute ...$attributes
+        SchemaAttribute ...$attributes,
     ) {
         $this->value = \is_string($value) ? $value : $value->value;
 

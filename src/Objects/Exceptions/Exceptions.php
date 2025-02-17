@@ -9,10 +9,7 @@ final class Exceptions
     public const ERROR_ENCODING = 501;
     public const ERROR_DECODING = 502;
 
-    /**
-     * @param mixed $record
-     */
-    public static function forEncode($record, \AvroSchema $schema, \Exception $previous = null): AvroEncodingException
+    public static function forEncode(mixed $record, \AvroSchema $schema, ?\Exception $previous = null): AvroEncodingException
     {
         $exportedRecord = \var_export($record, true);
 
@@ -29,7 +26,7 @@ MESSAGE;
         return new AvroEncodingException($message, self::ERROR_ENCODING, $previous);
     }
 
-    public static function forDecode(string $binaryMessage, \Exception $previous = null): AvroDecodingException
+    public static function forDecode(string $binaryMessage, ?\Exception $previous = null): AvroDecodingException
     {
         $convertedMessage = \bin2hex($binaryMessage);
         $message = <<<MESSAGE

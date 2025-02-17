@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects\Schema;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\Schema;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ArrayTypeTest extends TestCase
@@ -35,7 +35,6 @@ class ArrayTypeTest extends TestCase
             ->default(['foo', 'bar'])
             ->parse();
 
-        $this->assertInstanceOf(\AvroSchema::class, $parsedSchema);
         $this->assertEquals('array', $parsedSchema->type());
     }
 }

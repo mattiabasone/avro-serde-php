@@ -12,7 +12,7 @@ use FlixTech\AvroSerializer\Objects\Schema\Generation\SchemaAttributes;
 final class AvroDoc implements SchemaAttribute
 {
     public function __construct(
-        public string $value
+        public string $value,
     ) {
     }
 

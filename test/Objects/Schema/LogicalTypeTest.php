@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects\Schema;
 
+use FlixTech\AvroSerializer\Objects\Schema;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use FlixTech\AvroSerializer\Objects\Schema;
 use PHPUnit\Framework\TestCase;
 
 class LogicalTypeTest extends TestCase
 {
-    #[DataProvider('provideLogicalTypes')]
     #[Test]
-    public function it_should_serialize_simple_logical_types(Schema $type, string $expectedAnnotatedType, string $expectedLogicalType)
+    #[DataProvider('provideLogicalTypes')]
+    public function it_should_serialize_simple_logical_types(Schema $type, string $expectedAnnotatedType, string $expectedLogicalType): void
     {
         $expectedSchema = [
             'type' => $expectedAnnotatedType,
@@ -23,9 +23,9 @@ class LogicalTypeTest extends TestCase
         $this->assertEquals($expectedSchema, $type->serialize());
     }
 
-    #[DataProvider('provideLogicalTypes')]
     #[Test]
-    public function it_should_parse_simple_logical_types(Schema $type, string $expectedType, string $expectedLogicalType)
+    #[DataProvider('provideLogicalTypes')]
+    public function it_should_parse_simple_logical_types(Schema $type, string $expectedType, string $expectedLogicalType): void
     {
         $parsedSchema = $type->parse();
         $this->assertEquals($expectedType, $parsedSchema->type());
@@ -33,7 +33,7 @@ class LogicalTypeTest extends TestCase
     }
 
     #[Test]
-    public function it_should_serialize_duration_types()
+    public function it_should_serialize_duration_types(): void
     {
         $schema = Schema::duration()
             ->name('User')
@@ -54,7 +54,7 @@ class LogicalTypeTest extends TestCase
     }
 
     #[Test]
-    public function it_should_parse_duration_types()
+    public function it_should_parse_duration_types(): void
     {
         $parsedSchema = Schema::duration()
             ->name('User')

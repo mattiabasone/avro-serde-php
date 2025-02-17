@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\CallableResolver;
 use FlixTech\AvroSerializer\Test\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 use function Widmogrod\Functional\constt;
 
 class CallableResolverTest extends AbstractFunctionalTestCase
 {
     /**
-     *
-     * @throws \AvroSchemaParseException
      * @throws \AvroSchemaParseException
      */
     #[Test]

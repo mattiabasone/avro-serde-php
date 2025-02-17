@@ -52,11 +52,20 @@ JSON;
     public const INVALID_AVRO_ENCODED_RECORD_HEX_BIN = '0c54615f6d608348';
     public const INVALID_BIN_WRONG_VERSION = '44686f6d617348';
 
-    protected ?\AvroSchema $avroSchema;
+    /**
+     * @var \AvroSchema
+     */
+    protected \AvroSchema|\AvroFixedSchema|\AvroMapSchema|\AvroArraySchema|\AvroEnumSchema|\AvroPrimitiveSchema|\AvroRecordSchema|\AvroUnionSchema $avroSchema;
 
-    protected ?\AvroSchema $readersSchema;
+    /**
+     * @var \AvroSchema
+     */
+    protected \AvroSchema|\AvroFixedSchema|\AvroMapSchema|\AvroArraySchema|\AvroEnumSchema|\AvroPrimitiveSchema|\AvroUnionSchema|\AvroRecordSchema $readersSchema;
 
-    protected ?\AvroSchema $invalidSchema;
+    /**
+     * @var \AvroSchema
+     */
+    protected \AvroSchema|\AvroFixedSchema|\AvroMapSchema|\AvroArraySchema|\AvroEnumSchema|\AvroPrimitiveSchema|\AvroUnionSchema|\AvroRecordSchema $invalidSchema;
 
     /**
      * @throws \AvroSchemaParseException

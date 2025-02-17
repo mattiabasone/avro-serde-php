@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects;
 
-use PHPUnit\Framework\Attributes\Test;
 use FlixTech\AvroSerializer\Objects\DefaultRecordSerializerFactory;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class DefaultRecordSerializerFactoryTest extends TestCase
