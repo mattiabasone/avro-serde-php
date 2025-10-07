@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use Assert\Assert;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 
@@ -23,9 +25,9 @@ class FileResolver implements SchemaResolverInterface
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    public function valueSchemaFor(mixed $record): \AvroSchema
+    public function valueSchemaFor(mixed $record): AvroSchema
     {
         $inflectedFileName = \call_user_func($this->inflector, $record, false);
         Assert::that($inflectedFileName)->string()->notEmpty();
@@ -34,13 +36,13 @@ class FileResolver implements SchemaResolverInterface
 
         Assert::that($filePath)->string()->file();
 
-        return \AvroSchema::parse((string) @\file_get_contents($filePath));
+        return AvroSchema::parse((string) @\file_get_contents($filePath));
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    public function keySchemaFor(mixed $record): ?\AvroSchema
+    public function keySchemaFor(mixed $record): ?AvroSchema
     {
         $inflectedFileName = \call_user_func($this->inflector, $record, true);
         Assert::that($inflectedFileName)->string()->notEmpty();
@@ -51,7 +53,7 @@ class FileResolver implements SchemaResolverInterface
             return null;
         }
 
-        return \AvroSchema::parse($fileContents);
+        return AvroSchema::parse($fileContents);
     }
 
     private function getFilePath(string $inflectedFileName): string

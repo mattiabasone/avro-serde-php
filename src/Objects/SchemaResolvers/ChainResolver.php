@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 
 class ChainResolver implements SchemaResolverInterface
@@ -18,7 +19,7 @@ class ChainResolver implements SchemaResolverInterface
         $this->chain = $chain;
     }
 
-    public function valueSchemaFor(mixed $record): \AvroSchema
+    public function valueSchemaFor(mixed $record): AvroSchema
     {
         foreach ($this->chain as $schemaResolver) {
             try {
@@ -31,7 +32,7 @@ class ChainResolver implements SchemaResolverInterface
         throw new \InvalidArgumentException('No schema resolver in the chain is able to resolve the schema for the record');
     }
 
-    public function keySchemaFor(mixed $record): ?\AvroSchema
+    public function keySchemaFor(mixed $record): ?AvroSchema
     {
         $keySchema = null;
 

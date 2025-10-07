@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use Assert\Assert;
 use FlixTech\AvroSerializer\Objects\HasSchemaDefinitionInterface;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
@@ -11,20 +13,20 @@ use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 class DefinitionInterfaceResolver implements SchemaResolverInterface
 {
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    public function valueSchemaFor(mixed $record): \AvroSchema
+    public function valueSchemaFor(mixed $record): AvroSchema
     {
         /** @var HasSchemaDefinitionInterface $record */
         $this->guardRecordHasDefinition($record);
 
-        return \AvroSchema::parse($record::valueSchemaJson());
+        return AvroSchema::parse($record::valueSchemaJson());
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    public function keySchemaFor(mixed $record): ?\AvroSchema
+    public function keySchemaFor(mixed $record): ?AvroSchema
     {
         $this->guardRecordHasDefinition($record);
 
@@ -34,7 +36,7 @@ class DefinitionInterfaceResolver implements SchemaResolverInterface
             return null;
         }
 
-        return \AvroSchema::parse($keySchemaJson);
+        return AvroSchema::parse($keySchemaJson);
     }
 
     private function guardRecordHasDefinition(mixed $record): void

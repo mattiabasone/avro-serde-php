@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Objects\Schema\ArrayType;
 use FlixTech\AvroSerializer\Objects\Schema\BooleanType;
 use FlixTech\AvroSerializer\Objects\Schema\BytesType;
@@ -152,10 +154,10 @@ abstract class Schema implements Definition
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    final public function parse(): \AvroSchema
+    final public function parse(): AvroSchema
     {
-        return \AvroSchema::real_parse($this->serialize());
+        return AvroSchema::realParse($this->serialize());
     }
 }
