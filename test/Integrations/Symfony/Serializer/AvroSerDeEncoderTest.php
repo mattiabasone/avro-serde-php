@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Integrations\Symfony\Serializer;
 
+use Apache\Avro\Schema\AvroSchema;
 use FlixTech\AvroSerializer\Integrations\Symfony\Serializer\AvroSerDeEncoder;
 use FlixTech\AvroSerializer\Objects\RecordSerializer;
 use FlixTech\AvroSerializer\Test\AbstractFunctionalTestCase;
@@ -44,7 +45,7 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      * @throws SchemaRegistryException
      */
     #[Test]
@@ -99,7 +100,7 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
 
     /**
      * @throws SchemaRegistryException
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     #[DataProvider('encodeContextValidationDataProvider')]
@@ -117,7 +118,7 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     public static function encodeContextValidationDataProvider(): ?\Generator
     {
@@ -130,7 +131,7 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
 
         yield 'Missing subject in encode context' => [
             [
-                AvroSerDeEncoder::CONTEXT_ENCODE_WRITERS_SCHEMA => \AvroSchema::parse(
+                AvroSerDeEncoder::CONTEXT_ENCODE_WRITERS_SCHEMA => AvroSchema::parse(
                     AbstractFunctionalTestCase::SCHEMA_JSON
                 ),
             ],
@@ -138,7 +139,7 @@ class AvroSerDeEncoderTest extends AbstractFunctionalTestCase
 
         yield 'Invalid type for subject in encode context' => [
             [
-                AvroSerDeEncoder::CONTEXT_ENCODE_WRITERS_SCHEMA => \AvroSchema::parse(
+                AvroSerDeEncoder::CONTEXT_ENCODE_WRITERS_SCHEMA => AvroSchema::parse(
                     AbstractFunctionalTestCase::SCHEMA_JSON
                 ),
                 AvroSerDeEncoder::CONTEXT_ENCODE_SUBJECT => 42,

@@ -76,7 +76,7 @@ class SerializeTest extends AbstractFunctionalTestCase
     #[Test]
     public function avroDatumWriter_should_create_curried_function(): void
     {
-        $writer = new \AvroIODatumWriter();
+        $writer = new AvroIODatumWriter();
         $io = avroStringIo('');
 
         $this->assertEquals(
@@ -124,7 +124,7 @@ class SerializeTest extends AbstractFunctionalTestCase
     }
 
     /**
-     * @throws \AvroIOException
+     * @throws AvroIOException
      */
     #[Test]
     public function avroDatumReader_should_return_curried_function(): void
@@ -139,7 +139,7 @@ class SerializeTest extends AbstractFunctionalTestCase
     }
 
     /**
-     * @throws \AvroIOException
+     * @throws AvroIOException
      */
     #[Test]
     public function readDatum_should_return_Right_Monad_for_valid_inputs(): void

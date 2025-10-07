@@ -2,6 +2,8 @@
 
 namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\ChainResolver;
 use PHPUnit\Framework\Attributes\Test;
@@ -28,13 +30,13 @@ class ChainResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_will_exit_early_when_a_schema_has_been_resolved(): void
     {
         $record = 'I am a record';
-        $avroSchema = \AvroSchema::parse('{"type": "string"}');
+        $avroSchema = AvroSchema::parse('{"type": "string"}');
 
         $this->chainOne->expects($this->once())
             ->method('valueSchemaFor')
@@ -50,13 +52,13 @@ class ChainResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_will_exit_early_when_a_key_schema_has_been_resolved(): void
     {
         $record = 'I am a record';
-        $avroSchema = \AvroSchema::parse('{"type": "string"}');
+        $avroSchema = AvroSchema::parse('{"type": "string"}');
 
         $this->chainOne->expects($this->once())
             ->method('keySchemaFor')
@@ -72,13 +74,13 @@ class ChainResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_will_call_all_resolvers(): void
     {
         $record = 'I am a record';
-        $avroSchema = \AvroSchema::parse('{"type": "string"}');
+        $avroSchema = AvroSchema::parse('{"type": "string"}');
 
         $this->chainOne->expects($this->once())
             ->method('valueSchemaFor')
@@ -96,13 +98,13 @@ class ChainResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_will_call_all_resolvers_for_key_schemas(): void
     {
         $record = 'I am a record';
-        $avroSchema = \AvroSchema::parse('{"type": "string"}');
+        $avroSchema = AvroSchema::parse('{"type": "string"}');
 
         $this->chainOne->expects($this->once())
             ->method('keySchemaFor')
