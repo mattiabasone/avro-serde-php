@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FlixTech\AvroSerializer\Test\Integrations\Symfony\Serializer;
 
 use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Integrations\Symfony\Serializer\AvroSerDeEncoder;
 use FlixTech\AvroSerializer\Objects\RecordSerializer;
 use FlixTech\AvroSerializer\Test\AbstractFunctionalTestCase;

@@ -31,7 +31,9 @@ class CallableResolver implements SchemaResolverInterface
      */
     public function valueSchemaFor(mixed $record): AvroSchema
     {
-        return AvroSchema::parse(\call_user_func($this->valueSchemaResolverCallable, $record));
+        $schema = $this->resolveSchema($record);
+
+        return $schema ?? throw new \RuntimeException("Cannot resolve value schema for the given record");
     }
 
     /**
@@ -43,6 +45,16 @@ class CallableResolver implements SchemaResolverInterface
             return null;
         }
 
-        return AvroSchema::parse(\call_user_func($this->keySchemaResolverCallable, $record));
+        return $this->resolveSchema(\call_user_func($this->keySchemaResolverCallable, $record));
+    }
+
+    private function resolveSchema(mixed $record): ?AvroSchema
+    {
+        return match (true) {
+            $record instanceof AvroSchema => $record,
+            is_array($record) => AvroSchema::realParse($record),
+            is_string($record) => AvroSchema::parse($record),
+            default => null
+        };
     }
 }
