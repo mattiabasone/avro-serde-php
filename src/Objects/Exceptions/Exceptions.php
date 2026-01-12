@@ -28,7 +28,7 @@ MESSAGE;
         return new AvroEncodingException($message, self::ERROR_ENCODING, $previous);
     }
 
-    public static function forDecode(string $binaryMessage, ?\Exception $previous = null): AvroDecodingException
+    public static function forDecode(string $binaryMessage, ?\Throwable $previous = null): AvroDecodingException
     {
         $convertedMessage = \bin2hex($binaryMessage);
         $message = <<<MESSAGE

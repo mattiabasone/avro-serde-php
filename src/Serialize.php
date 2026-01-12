@@ -105,7 +105,7 @@ function readDatum(
 
             return Right::of($reader->readData($writersSchema, $readersSchema, avroBinaryDecoder($io)));
         },
-        static function (AvroException $e) use ($data) {
+        static function (\Throwable $e) use ($data) {
             return Left::of(
                 Exceptions::forDecode($data, $e)
             );
