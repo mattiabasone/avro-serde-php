@@ -31,7 +31,7 @@ class CallableResolver implements SchemaResolverInterface
      */
     public function valueSchemaFor(mixed $record): AvroSchema
     {
-        $schema = $this->resolveSchema($record);
+        $schema = $this->resolveSchema(\call_user_func($this->valueSchemaResolverCallable, $record));
 
         return $schema ?? throw new \RuntimeException("Cannot resolve value schema for the given record");
     }
