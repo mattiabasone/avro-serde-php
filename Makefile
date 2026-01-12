@@ -4,10 +4,10 @@ MAKEFLAGS =+ -rR --warn-undefined-variables
 .PHONY: composer-install composer-update composer-update-lowest phpstan cs-fixer examples docker run
 
 CONFLUENT_VERSION ?= latest
-CONFLUENT_NETWORK_SUBNET ?= 172.69.0.0/24
-CONFLUENT_NETWORK_GATEWAY ?= 172.69.0.1
-SCHEMA_REGISTRY_IPV4 ?= 172.69.0.103
-KAFKA_BROKER_IPV4 ?= 172.69.0.102
+CONFLUENT_NETWORK_SUBNET ?= 172.68.0.0/24
+CONFLUENT_NETWORK_GATEWAY ?= 172.68.0.1
+SCHEMA_REGISTRY_IPV4 ?= 172.68.0.103
+KAFKA_BROKER_IPV4 ?= 172.68.0.102
 COMPOSER ?= bin/composer.phar
 COMPOSER_VERSION ?= 2.9.3
 PHP_STAN ?= bin/phpstan.phar
@@ -17,7 +17,7 @@ PHP_CS_FIXER_VERSION ?= 3.65.0
 PHPUNIT ?= vendor/bin/phpunit
 PHP ?= bin/php
 PHP_VERSION ?= 8.3
-XDEBUG_VERSION ?= 3.4.0
+XDEBUG_VERSION ?= 3.5.0
 XDEBUG_OPTIONS ?= -d xdebug.mode=off
 export
 

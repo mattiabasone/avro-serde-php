@@ -59,20 +59,16 @@ const writeDatum = '\FlixTech\AvroSerializer\Serialize\writeDatum';
 
 function writeDatum(AvroIODatumWriter $writer, AvroStringIO $io, AvroSchema $schema, mixed $record): Either
 {
-    return tryCatch(
-        static function ($record) use ($schema, $writer, $io) {
-            $io->truncate();
-            $writer->writeData($schema, $record, avroBinaryEncoder($io));
+    try {
+        $io->truncate();
+        $writer->writeData($schema, $record, avroBinaryEncoder($io));
 
-            return Right::of($io->string());
-        },
-        static function (AvroException $e) use ($record, $schema) {
-            return Left::of(
-                Exceptions::forEncode($record, $schema, $e)
-            );
-        },
-        $record
-    );
+        return Right::of($io->string());
+    } catch (\Throwable $e) {
+        return Left::of(
+            Exceptions::forEncode($record, $schema, $e)
+        );
+    }
 }
 
 const avroDatumReader = '\FlixTech\AvroSerializer\Serialize\avroDatumReader';
@@ -97,19 +93,15 @@ function readDatum(
     AvroSchema $readersSchema,
     mixed $data,
 ): Either {
-    return tryCatch(
-        static function ($data) use ($writersSchema, $readersSchema, $reader, $io) {
-            $io->truncate();
-            $io->write($data);
-            $io->seek(0);
+    try {
+        $io->truncate();
+        $io->write($data);
+        $io->seek(0);
 
-            return Right::of($reader->readData($writersSchema, $readersSchema, avroBinaryDecoder($io)));
-        },
-        static function (\Throwable $e) use ($data) {
-            return Left::of(
-                Exceptions::forDecode($data, $e)
-            );
-        },
-        $data
-    );
+        return Right::of($reader->readData($writersSchema, $readersSchema, avroBinaryDecoder($io)));
+    } catch (\Throwable $e) {
+        return Left::of(
+            Exceptions::forDecode($data, $e)
+        );
+    }
 }
