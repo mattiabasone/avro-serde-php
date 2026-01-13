@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Function FlixTech\\AvroSerializer\\Serialize\\readDatum\(\) should return Widmogrod\\Monad\\Either\\Either but returns FunctionalPHP\\FantasyLand\\Pointed\<mixed\>\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Serialize.php
+
+		-
+			message: '#^Function FlixTech\\AvroSerializer\\Serialize\\writeDatum\(\) should return Widmogrod\\Monad\\Either\\Either but returns FunctionalPHP\\FantasyLand\\Pointed\<mixed\>\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Serialize.php
