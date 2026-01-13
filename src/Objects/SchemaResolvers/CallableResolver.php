@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Objects\SchemaResolverInterface;
 
 class CallableResolver implements SchemaResolverInterface
@@ -25,22 +27,34 @@ class CallableResolver implements SchemaResolverInterface
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    public function valueSchemaFor(mixed $record): \AvroSchema
+    public function valueSchemaFor(mixed $record): AvroSchema
     {
-        return \AvroSchema::parse(\call_user_func($this->valueSchemaResolverCallable, $record));
+        $schema = $this->resolveSchema(\call_user_func($this->valueSchemaResolverCallable, $record));
+
+        return $schema ?? throw new \RuntimeException('Cannot resolve value schema for the given record');
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
-    public function keySchemaFor(mixed $record): ?\AvroSchema
+    public function keySchemaFor(mixed $record): ?AvroSchema
     {
         if (!$this->keySchemaResolverCallable) {
             return null;
         }
 
-        return \AvroSchema::parse(\call_user_func($this->keySchemaResolverCallable, $record));
+        return $this->resolveSchema(\call_user_func($this->keySchemaResolverCallable, $record));
+    }
+
+    private function resolveSchema(mixed $record): ?AvroSchema
+    {
+        return match (true) {
+            $record instanceof AvroSchema => $record,
+            \is_array($record) => AvroSchema::realParse($record),
+            \is_string($record) => AvroSchema::parse($record),
+            default => null,
+        };
     }
 }

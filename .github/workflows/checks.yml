@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   build-source:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       -
         name: Checkout
@@ -29,18 +29,18 @@ jobs:
       matrix:
         php:
           -
-            version: '8.1'
-            xdebug: '3.4.0'
-          -
             version: '8.2'
-            xdebug: '3.4.0'
+            xdebug: '3.5.0'
           -
             version: '8.3'
-            xdebug: '3.4.0'
+            xdebug: '3.5.0'
           -
             version: '8.4'
-            xdebug: '3.4.0'
-    runs-on: ubuntu-22.04
+            xdebug: '3.5.0'
+          -
+            version: '8.5'
+            xdebug: '3.5.0'
+    runs-on: ubuntu-24.04
     steps:
       -
         name: Download sources
@@ -76,16 +76,13 @@ jobs:
           name: php-avro-serde-${{ matrix.php.version }}
           path: php-avro-serde-${{ matrix.php.version }}.tgz
   ci-checks:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - php-xdebug-docker
     strategy:
       matrix:
         php:
           -
-            version: '8.1'
-            composer: --prefer-lowest
-          -
             version: '8.2'
             composer: --prefer-lowest
           -
@@ -95,8 +92,8 @@ jobs:
             version: '8.4'
             composer: --prefer-lowest
           -
-            version: '8.1'
-            composer: --prefer-stable
+            version: '8.5'
+            composer: --prefer-lowest
           -
             version: '8.2'
             composer: --prefer-stable
@@ -105,6 +102,9 @@ jobs:
             composer: --prefer-stable
           -
             version: '8.4'
+            composer: --prefer-stable
+          -
+            version: '8.5'
             composer: --prefer-stable
     steps:
       -
@@ -166,16 +166,15 @@ jobs:
           coverageLocations: |
             ${{github.workspace}}/build/coverage.clover:clover
   confluent-integration:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - php-xdebug-docker
     strategy:
       matrix:
         confluent:
-          -
-            version: latest
-          -
-            version: 5.5.2
+          - version: latest
+          - version: 7.7.7
+          - version: 8.0.3
     steps:
       -
         name: Download sources

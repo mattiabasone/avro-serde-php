@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects;
 
+use Apache\Avro\IO\AvroIOException;
+use Apache\Avro\Schema\AvroSchema;
 use FlixTech\SchemaRegistryApi\Exception\SchemaNotFoundException;
 use FlixTech\SchemaRegistryApi\Exception\SchemaRegistryException;
 use FlixTech\SchemaRegistryApi\Exception\SubjectNotFoundException;
@@ -73,7 +75,7 @@ class RecordSerializer
      *
      * @param array<string,mixed> $options
      *
-     * @throws \AvroIOException
+     * @throws AvroIOException
      */
     public function __construct(Registry $registry, array $options = [])
     {
@@ -101,7 +103,7 @@ class RecordSerializer
      * @throws \Exception
      * @throws SchemaRegistryException
      */
-    public function encodeRecord(string $subject, \AvroSchema $schema, mixed $record): string
+    public function encodeRecord(string $subject, AvroSchema $schema, mixed $record): string
     {
         $schemaId = $this->getSchemaIdForSchema($subject, $schema);
         $cachedWriter = memoize($this->datumWriterFactoryFunc, [$schema], 'writer_' . $schemaId);
@@ -116,11 +118,11 @@ class RecordSerializer
      * @throws \Exception
      * @throws SchemaRegistryException
      */
-    public function decodeMessage(string $binaryMessage, ?\AvroSchema $readersSchema = null): mixed
+    public function decodeMessage(string $binaryMessage, ?AvroSchema $readersSchema = null): mixed
     {
         $decoded = decode($binaryMessage);
         $schemaId = valueOf($decoded->bind($this->schemaIdGetter));
-        /** @var \AvroSchema $writersSchema */
+        /** @var AvroSchema $writersSchema */
         $writersSchema = $this->extractValueFromRegistryResponse($this->registry->schemaForId($schemaId));
         $readersSchema = $readersSchema ?? $writersSchema;
         $cachedReader = memoize($this->datumReaderFactoryFunc, [$writersSchema], 'reader_' . $schemaId);
@@ -141,7 +143,7 @@ class RecordSerializer
      * @throws \Exception
      * @throws SchemaRegistryException
      */
-    private function getSchemaIdForSchema(string $subject, \AvroSchema $schema): int
+    private function getSchemaIdForSchema(string $subject, AvroSchema $schema): int
     {
         try {
             $schemaId = $this->extractValueFromRegistryResponse($this->registry->schemaId($subject, $schema));

@@ -29,7 +29,7 @@ class LogicalTypeTest extends TestCase
     {
         $parsedSchema = $type->parse();
         $this->assertEquals($expectedType, $parsedSchema->type());
-        $this->assertEquals($expectedLogicalType, $parsedSchema->logical_type());
+        $this->assertEquals($expectedLogicalType, $parsedSchema->logicalType()->name());
     }
 
     #[Test]
@@ -63,7 +63,7 @@ class LogicalTypeTest extends TestCase
             ->parse();
 
         $this->assertEquals('fixed', $parsedSchema->type());
-        $this->assertEquals('duration', $parsedSchema->logical_type());
+        $this->assertEquals('duration', $parsedSchema->logicalType()->name());
     }
 
     public static function provideLogicalTypes(): array

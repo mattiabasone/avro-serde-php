@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\FileResolver;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +16,7 @@ use function FlixTech\AvroSerializer\Common\inflectRecord;
 class FileResolverTest extends TestCase
 {
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_should_find_value_and_key_schemas_when_defined(): void
@@ -22,19 +24,19 @@ class FileResolverTest extends TestCase
         $fileSchemaResolver = $this->getFileSchemaResolverInstance();
 
         $valueSchema = $fileSchemaResolver->valueSchemaFor(new TestRecordOne());
-        $this->assertEquals(\AvroSchema::parse('{"type": "int"}'), $valueSchema);
+        $this->assertEquals(AvroSchema::parse('{"type": "int"}'), $valueSchema);
 
         $keySchema = $fileSchemaResolver->keySchemaFor(new TestRecordOne());
-        $this->assertEquals(\AvroSchema::parse('{"type": "string"}'), $keySchema);
+        $this->assertEquals(AvroSchema::parse('{"type": "string"}'), $keySchema);
 
         $valueSchema = $fileSchemaResolver->valueSchemaFor(new TestRecordTwo());
-        $this->assertEquals(\AvroSchema::parse('{"type": "int"}'), $valueSchema);
+        $this->assertEquals(AvroSchema::parse('{"type": "int"}'), $valueSchema);
 
         $this->assertNull($fileSchemaResolver->keySchemaFor(new TestRecordTwo()));
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_should_fail_for_non_existing_value_schema(): void
@@ -47,7 +49,7 @@ class FileResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_should_fail_for_value_schema_for_invalid_inflector_result(): void
@@ -64,7 +66,7 @@ class FileResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_should_fail_for_key_schema_for_invalid_inflector_result(): void

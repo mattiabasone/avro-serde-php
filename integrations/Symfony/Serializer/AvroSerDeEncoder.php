@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Integrations\Symfony\Serializer;
 
+use Apache\Avro\Schema\AvroSchema;
 use Assert\Assert;
 use FlixTech\AvroSerializer\Objects\RecordSerializer;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
@@ -32,7 +33,7 @@ class AvroSerDeEncoder implements EncoderInterface, DecoderInterface
     public function decode(string $data, string $format, array $context = []): mixed
     {
         $readersSchema = $context[self::CONTEXT_DECODE_READERS_SCHEMA] ?? null;
-        Assert::that($readersSchema)->nullOr()->isInstanceOf(\AvroSchema::class);
+        Assert::that($readersSchema)->nullOr()->isInstanceOf(AvroSchema::class);
 
         return $this->recordSerializer->decodeMessage($data, $readersSchema);
     }
@@ -54,7 +55,7 @@ class AvroSerDeEncoder implements EncoderInterface, DecoderInterface
 
         return $this->recordSerializer->encodeRecord(
             $context[self::CONTEXT_ENCODE_SUBJECT],
-            \AvroSchema::parse($context[self::CONTEXT_ENCODE_WRITERS_SCHEMA]),
+            $context[self::CONTEXT_ENCODE_WRITERS_SCHEMA],
             $data
         );
     }
@@ -70,7 +71,7 @@ class AvroSerDeEncoder implements EncoderInterface, DecoderInterface
             ->keyIsset(self::CONTEXT_ENCODE_WRITERS_SCHEMA)
             ->keyIsset(self::CONTEXT_ENCODE_SUBJECT);
 
-        Assert::that($context[self::CONTEXT_ENCODE_WRITERS_SCHEMA])->isInstanceOf(\AvroSchema::class);
+        Assert::that($context[self::CONTEXT_ENCODE_WRITERS_SCHEMA])->isInstanceOf(AvroSchema::class);
         Assert::that($context[self::CONTEXT_ENCODE_SUBJECT])
             ->string()
             ->notBlank()

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test\Objects;
 
+use Apache\Avro\IO\AvroIOException;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Objects\Exceptions\AvroEncodingException;
 use FlixTech\AvroSerializer\Objects\RecordSerializer;
 use FlixTech\AvroSerializer\Test\AbstractFunctionalTestCase;
@@ -25,8 +27,8 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
     private RecordSerializer $recordSerializer;
 
     /**
-     * @throws \AvroSchemaParseException
-     * @throws \AvroIOException
+     * @throws AvroSchemaParseException
+     * @throws AvroIOException
      * @throws Exception
      */
     protected function setUp(): void
@@ -107,7 +109,7 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
      * @test
      *
      * @throws SchemaRegistryException
-     * @throws \AvroIOException
+     * @throws AvroIOException
      */
     public function it_should_register_new_schemas_when_configured(): void
     {
@@ -158,7 +160,7 @@ class RecordSerializerTest extends AbstractFunctionalTestCase
 
     /**
      * @throws SchemaRegistryException
-     * @throws \AvroIOException
+     * @throws AvroIOException
      */
     #[Test]
     public function it_should_register_new_subject_when_configured(): void

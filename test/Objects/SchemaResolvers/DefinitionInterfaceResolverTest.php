@@ -2,6 +2,8 @@
 
 namespace FlixTech\AvroSerializer\Test\Objects\SchemaResolvers;
 
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
 use FlixTech\AvroSerializer\Objects\HasSchemaDefinitionInterface;
 use FlixTech\AvroSerializer\Objects\SchemaResolvers\DefinitionInterfaceResolver;
 use PHPUnit\Framework\Attributes\Test;
@@ -10,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class DefinitionInterfaceResolverTest extends TestCase
 {
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     public function it_should_allow_correct_interfaces(): void
     {
@@ -18,7 +20,7 @@ class DefinitionInterfaceResolverTest extends TestCase
         $definitionClass = $this->createAnonymousDefinitionInterface();
 
         $this->assertEquals(
-            \AvroSchema::parse('{"type": "string"}'),
+            AvroSchema::parse('{"type": "string"}'),
             $definitionInterfaceResolver->valueSchemaFor($definitionClass)
         );
 
@@ -29,18 +31,18 @@ class DefinitionInterfaceResolverTest extends TestCase
         );
 
         $this->assertEquals(
-            \AvroSchema::parse('{"type": "string"}'),
+            AvroSchema::parse('{"type": "string"}'),
             $definitionInterfaceResolver->valueSchemaFor($definitionClass)
         );
 
         $this->assertEquals(
-            \AvroSchema::parse('{"type": "int"}'),
+            AvroSchema::parse('{"type": "int"}'),
             $definitionInterfaceResolver->keySchemaFor($definitionClass)
         );
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_should_fail_for_records_not_implementing_the_interface_for_value_schema(): void
@@ -52,7 +54,7 @@ class DefinitionInterfaceResolverTest extends TestCase
     }
 
     /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     #[Test]
     public function it_should_fail_for_records_not_implementing_the_interface_for_key_schema(): void

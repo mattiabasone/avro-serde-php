@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Test;
 
+use Apache\Avro\Schema\AvroArraySchema;
+use Apache\Avro\Schema\AvroEnumSchema;
+use Apache\Avro\Schema\AvroFixedSchema;
+use Apache\Avro\Schema\AvroMapSchema;
+use Apache\Avro\Schema\AvroPrimitiveSchema;
+use Apache\Avro\Schema\AvroRecordSchema;
+use Apache\Avro\Schema\AvroSchema;
+use Apache\Avro\Schema\AvroSchemaParseException;
+use Apache\Avro\Schema\AvroUnionSchema;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractFunctionalTestCase extends TestCase
@@ -52,28 +61,19 @@ JSON;
     public const INVALID_AVRO_ENCODED_RECORD_HEX_BIN = '0c54615f6d608348';
     public const INVALID_BIN_WRONG_VERSION = '44686f6d617348';
 
-    /**
-     * @var \AvroSchema
-     */
-    protected \AvroSchema|\AvroFixedSchema|\AvroMapSchema|\AvroArraySchema|\AvroEnumSchema|\AvroPrimitiveSchema|\AvroRecordSchema|\AvroUnionSchema $avroSchema;
+    protected AvroSchema|AvroFixedSchema|AvroMapSchema|AvroArraySchema|AvroEnumSchema|AvroPrimitiveSchema|AvroRecordSchema|AvroUnionSchema $avroSchema;
+
+    protected AvroSchema|AvroFixedSchema|AvroMapSchema|AvroArraySchema|AvroEnumSchema|AvroPrimitiveSchema|AvroRecordSchema|AvroUnionSchema $readersSchema;
+
+    protected AvroSchema|AvroFixedSchema|AvroMapSchema|AvroArraySchema|AvroEnumSchema|AvroPrimitiveSchema|AvroRecordSchema|AvroUnionSchema $invalidSchema;
 
     /**
-     * @var \AvroSchema
-     */
-    protected \AvroSchema|\AvroFixedSchema|\AvroMapSchema|\AvroArraySchema|\AvroEnumSchema|\AvroPrimitiveSchema|\AvroUnionSchema|\AvroRecordSchema $readersSchema;
-
-    /**
-     * @var \AvroSchema
-     */
-    protected \AvroSchema|\AvroFixedSchema|\AvroMapSchema|\AvroArraySchema|\AvroEnumSchema|\AvroPrimitiveSchema|\AvroUnionSchema|\AvroRecordSchema $invalidSchema;
-
-    /**
-     * @throws \AvroSchemaParseException
+     * @throws AvroSchemaParseException
      */
     protected function setUp(): void
     {
-        $this->avroSchema = \AvroSchema::parse(self::SCHEMA_JSON);
-        $this->readersSchema = \AvroSchema::parse(self::READERS_SCHEMA_JSON);
-        $this->invalidSchema = \AvroSchema::parse(self::INVALID_READERS_SCHEMA_JSON);
+        $this->avroSchema = AvroSchema::parse(self::SCHEMA_JSON);
+        $this->readersSchema = AvroSchema::parse(self::READERS_SCHEMA_JSON);
+        $this->invalidSchema = AvroSchema::parse(self::INVALID_READERS_SCHEMA_JSON);
     }
 }

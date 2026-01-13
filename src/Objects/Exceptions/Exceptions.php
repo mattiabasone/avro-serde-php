@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace FlixTech\AvroSerializer\Objects\Exceptions;
 
+use Apache\Avro\Schema\AvroSchema;
+
 final class Exceptions
 {
     public const ERROR_ENCODING = 501;
     public const ERROR_DECODING = 502;
 
-    public static function forEncode(mixed $record, \AvroSchema $schema, ?\Exception $previous = null): AvroEncodingException
+    public static function forEncode(mixed $record, AvroSchema $schema, ?\Throwable $previous = null): AvroEncodingException
     {
         $exportedRecord = \var_export($record, true);
 
@@ -26,7 +28,7 @@ MESSAGE;
         return new AvroEncodingException($message, self::ERROR_ENCODING, $previous);
     }
 
-    public static function forDecode(string $binaryMessage, ?\Exception $previous = null): AvroDecodingException
+    public static function forDecode(string $binaryMessage, ?\Throwable $previous = null): AvroDecodingException
     {
         $convertedMessage = \bin2hex($binaryMessage);
         $message = <<<MESSAGE
