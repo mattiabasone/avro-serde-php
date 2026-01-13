@@ -33,7 +33,7 @@ class CallableResolver implements SchemaResolverInterface
     {
         $schema = $this->resolveSchema(\call_user_func($this->valueSchemaResolverCallable, $record));
 
-        return $schema ?? throw new \RuntimeException("Cannot resolve value schema for the given record");
+        return $schema ?? throw new \RuntimeException('Cannot resolve value schema for the given record');
     }
 
     /**
@@ -52,9 +52,9 @@ class CallableResolver implements SchemaResolverInterface
     {
         return match (true) {
             $record instanceof AvroSchema => $record,
-            is_array($record) => AvroSchema::realParse($record),
-            is_string($record) => AvroSchema::parse($record),
-            default => null
+            \is_array($record) => AvroSchema::realParse($record),
+            \is_string($record) => AvroSchema::parse($record),
+            default => null,
         };
     }
 }

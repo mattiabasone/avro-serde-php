@@ -15,7 +15,6 @@ use Widmogrod\Monad\Either\Left;
 use Widmogrod\Monad\Either\Right;
 
 use function Widmogrod\Functional\curryN;
-use function Widmogrod\Functional\tryCatch;
 
 const avroStringIo = '\FlixTech\AvroSerializer\Serialize\avroStringIo';
 
