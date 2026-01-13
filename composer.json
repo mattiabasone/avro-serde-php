@@ -14,7 +14,7 @@
     "symfony",
     "symfony-serializer"
   ],
-  "minimum-stability": "RC",
+  "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
