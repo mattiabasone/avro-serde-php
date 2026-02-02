@@ -32,7 +32,7 @@
     "mattiabasone/confluent-schema-registry-api": "^9.0",
     "guzzlehttp/promises": "^1.4.0|^2.0.0",
     "widmogrod/php-functional": "^6.0|^7.0",
-    "apache/avro": "dev-main#3af7a4654d574be7c78125e610a7d4ca23542eab"
+    "apache/avro": "dev-main#c499eefb48aa2db906c7bca14a047223806f36db"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
