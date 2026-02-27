@@ -157,14 +157,14 @@ jobs:
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
             -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" php-avro-serde:${{ matrix.php.version }} \
             -d xdebug.mode=coverage vendor/bin/phpunit --exclude-group integration --coverage-clover=build/coverage.clover --coverage-text
-      - name: Publish code coverage
-        if: ${{ matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        uses: paambaati/codeclimate-action@v9
-        env:
-          CC_TEST_REPORTER_ID: ${{secrets.CODE_CLIMATE_REPORTER_ID}}
-        with:
-          coverageLocations: |
-            ${{github.workspace}}/build/coverage.clover:clover
+#      - name: Publish code coverage
+#        if: ${{ matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+#        uses: paambaati/codeclimate-action@v9
+#        env:
+#          CC_TEST_REPORTER_ID: ${{secrets.CODE_CLIMATE_REPORTER_ID}}
+#        with:
+#          coverageLocations: |
+#            ${{github.workspace}}/build/coverage.clover:clover
   confluent-integration:
     runs-on: ubuntu-24.04
     needs:
